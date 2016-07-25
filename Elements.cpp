@@ -87,12 +87,13 @@ Move()
 	mTop = mQPoint.y() >= mRect.y() + mRect.height() - mRadius - mSpeed; 
 	mBottom = mQPoint.y() < mRect.y() + mRadius + mSpeed; 
 	if(mRight || mLeft || mTop || mBottom) {
-		//x = mQPoint.x() + (mSpeed * atan((90 - mAngle) * PI/180));
-		//y = mQPoint.y() + (mSpeed * atan((90 - mAngle) * PI/180));
-	} else {
-		mQPoint.setX(x);
-		mQPoint.setY(y);
+		//int xx = mQPoint.x() + (int)(mSpeed * atan(mAngle * PI/180));
+		//int yy = mQPoint.y() + (int)(mSpeed * atan(mAngle * PI/180));
+		x = mQPoint.x() + (mSpeed * cos(mAngle * PI/180));
+		y = mQPoint.y() + (mSpeed * sin(mAngle * PI/180));
 	}
+	mQPoint.setX(x);
+	mQPoint.setY(y);
 }
 
 } /// End of namespace Chaos
