@@ -89,8 +89,12 @@ Move()
 	if(mRight || mLeft || mTop || mBottom) {
 		//int xx = mQPoint.x() + (int)(mSpeed * atan(mAngle * PI/180));
 		//int yy = mQPoint.y() + (int)(mSpeed * atan(mAngle * PI/180));
-		x = mQPoint.x() + (mSpeed * cos(mAngle * PI/180));
-		y = mQPoint.y() + (mSpeed * sin(mAngle * PI/180));
+		//x = mQPoint.x() + (mSpeed * cos(mAngle * PI/180));
+		//y = mQPoint.y() + (mSpeed * sin(mAngle * PI/180));
+		if(mRight) { y = mQPoint.y() + mSpeed; x = mQPoint.x() - mSpeed; mAngle = mAngle - 180;}
+		if(mLeft) { y = mQPoint.y() - mSpeed; x = mQPoint.x() + mSpeed; mAngle = mAngle - 180;}
+		if(mTop) { x = mQPoint.x() + mSpeed; y = mQPoint.y() - mSpeed; mAngle = mAngle - 180;}
+		if(mBottom) { x = mQPoint.x() - mSpeed; y = mQPoint.y() + mSpeed; mAngle = mAngle - 180;}
 	}
 	mQPoint.setX(x);
 	mQPoint.setY(y);
