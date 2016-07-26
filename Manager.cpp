@@ -27,9 +27,9 @@ Start()
 
 	m.mObserver = new ElementsObserver();
 
-	m.mElements.push_back(new Element(m.mObserver, QPoint(500, 300), m.mChaosWidget->rect(), 2, 20, 0));
-	//m.mElements.push_back(new Element(m.mObserver, QPoint(200, 300), m.mChaosWidget->rect(), 3, 40, -90));
-	//m.mElements.push_back(new Element(m.mObserver, QPoint(400, 200), m.mChaosWidget->rect(), 5, 20, 90));
+	//m.mElements.push_back(new Element(m.mObserver, QPoint(500, 300), m.mChaosWidget->rect(), 4, 20, 155));
+	//m.mElements.push_back(new Element(m.mObserver, QPoint(200, 300), m.mChaosWidget->rect(), 5, 40, 30));
+	m.mElements.push_back(new Element(m.mObserver, QPoint(400, 200), m.mChaosWidget->rect(), 5, 20, 120));
 //	m.mElements.push_back(new Element(m.mObserver, QPoint(700, 70), 20, 10, 3));
 //	m.mElements.push_back(new Element(m.mObserver, QPoint(900, 290), 20, 10, 4));
 

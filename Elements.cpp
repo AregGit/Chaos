@@ -3,6 +3,7 @@
 #include <chrono>
 #include <cmath>
 #include <thread>
+#include <iostream>
 
 #define PI 3.14159265359
 
@@ -58,10 +59,7 @@ Element(ElementsObserver* ob, const QPoint& pt, const QRect& rc
 	, mSpeed(sp)
 	, mRadius(rd)
 	, mAngle(an)
-	, mLeft(-1)
-	, mRight(-1)
-	, mTop(-1)
-	, mBottom(-1)
+	, mStep(5)
 	, mQPoint(pt)
 	, mObserver(ob)
 	, mRect(rc)
@@ -80,22 +78,20 @@ void Element::
 Move()
 {
 	std::this_thread::sleep_for(std::chrono::milliseconds(10 / mSpeed));
+	bool left = mQPoint.x() <= mRect.x() + mRadius;
+	bool right = mQPoint.x() >= mRect.x() + mRect.width() - mRadius;
+	bool bottom = mQPoint.y() <= mRect.y() + mRadius;
+	bool top = mQPoint.y() >= mRect.y() + mRect.height() - mRadius;
+	if(right || left || top || bottom) {
+		if(left || top) {
+			mAngle -= 90;
+		} else {
+			mAngle += 90;
+		}
+	}
 	int x = mQPoint.x() + (int)(mSpeed * cos(mAngle * PI/180));
 	int y = mQPoint.y() + (int)(mSpeed * sin(mAngle * PI/180));
-	mLeft = mQPoint.x() < mRect.x() + mRadius + mSpeed; 
-	mRight = mQPoint.x() >= mRect.x() + mRect.width() - mRadius - mSpeed; 
-	mTop = mQPoint.y() >= mRect.y() + mRect.height() - mRadius - mSpeed; 
-	mBottom = mQPoint.y() < mRect.y() + mRadius + mSpeed; 
-	if(mRight || mLeft || mTop || mBottom) {
-		//int xx = mQPoint.x() + (int)(mSpeed * atan(mAngle * PI/180));
-		//int yy = mQPoint.y() + (int)(mSpeed * atan(mAngle * PI/180));
-		//x = mQPoint.x() + (mSpeed * cos(mAngle * PI/180));
-		//y = mQPoint.y() + (mSpeed * sin(mAngle * PI/180));
-		if(mRight) { y = mQPoint.y() + mSpeed; x = mQPoint.x() - mSpeed; mAngle = mAngle - 180;}
-		if(mLeft) { y = mQPoint.y() - mSpeed; x = mQPoint.x() + mSpeed; mAngle = mAngle - 180;}
-		if(mTop) { x = mQPoint.x() + mSpeed; y = mQPoint.y() - mSpeed; mAngle = mAngle - 180;}
-		if(mBottom) { x = mQPoint.x() - mSpeed; y = mQPoint.y() + mSpeed; mAngle = mAngle - 180;}
-	}
+	std::cout << x << " " << y << " " << mAngle << std::endl;
 	mQPoint.setX(x);
 	mQPoint.setY(y);
 }

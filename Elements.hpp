@@ -239,10 +239,7 @@ private:
 	int mSpeed;
 	int mRadius;
 	int mAngle;
-	int mLeft;
-	int mRight;
-	int mTop;
-	int mBottom;
+	int mStep;
 	QPoint mQPoint;
 	ElementsObserver* mObserver;
 	QRect mRect;
